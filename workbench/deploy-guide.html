@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宇宙边角办事处 · 极简部署教程</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #F5F3FF;
+    color: #1a1a2e;
+    line-height: 1.9;
+    padding: 16px;
+  }
+  .container { max-width: 760px; margin: 0 auto; }
+
+  /* 大标题 */
+  .hero {
+    background: linear-gradient(135deg, #6C5CE7 0%, #FF6B9D 100%);
+    color: #fff;
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 32px rgba(108,92,231,0.25);
+  }
+  .hero h1 { font-size: 24px; margin-bottom: 8px; }
+  .hero p { font-size: 14px; opacity: 0.9; }
+
+  /* 大章节 */
+  .chapter {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(108,92,231,0.08);
+  }
+  .chapter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .badge-1 { background: linear-gradient(135deg, #6C5CE7, #8E7BFF); }
+  .badge-2 { background: linear-gradient(135deg, #FF6B9D, #FF8FB1); }
+  .badge-3 { background: linear-gradient(135deg, #00B894, #00CEC9); }
+
+  .chapter h2 {
+    font-size: 20px;
+    color: #1A0F3D;
+    margin-bottom: 6px;
+  }
+  .chapter .desc {
+    font-size: 14px;
+    color: #665577;
+    margin-bottom: 20px;
+  }
+
+  /* 步骤卡片 */
+  .step {
+    border: 2px solid #F0EBFF;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .step:hover { border-color: #C9BFFF; }
+  .step-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .step-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6C5CE7, #FF6B9D);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1A0F3D;
+    padding-top: 4px;
+  }
+  .step-body {
+    padding-left: 42px;
+    font-size: 14px;
+    color: #333;
+  }
+  .step-body p { margin-bottom: 8px; }
+  .step-body p:last-child { margin-bottom: 0; }
+
+  /* 高亮关键词 */
+  .btn-key {
+    display: inline-block;
+    background: #F0EBFF;
+    color: #6C5CE7;
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .url-key {
+    display: inline-block;
+    background: #1A0F3D;
+    color: #A29BFE;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    word-break: break-all;
+  }
+  .copy-box {
+    background: #1A0F3D;
+    color: #E0D8F0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    margin: 8px 0;
+    word-break: break-all;
+    line-height: 1.6;
+    position: relative;
+  }
+  .copy-label {
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    background: #FF6B9D;
+    color: #fff;
+    font-size: 11px;
+    font-family: -apple-system, sans-serif;
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  /* 提示框 */
+  .tip {
+    background: linear-gradient(135deg, #FFF9E6, #FFF3E0);
+    border-left: 4px solid #FFB74D;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-size: 13px;
+  }
+  .tip b { color: #E65100; }
+
+  .success {
+    background: linear-gradient(135deg, #E8F5E9, #E0F2F1);
+    border-left: 4px solid #4CAF50;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-size: 13px;
+  }
+  .success b { color: #2E7D32; }
+
+  .warn {
+    background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+    border-left: 4px solid #F44336;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-size: 13px;
+  }
+  .warn b { color: #C62828; }
+
+  /* 表格 */
+  .field-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 13px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .field-table th {
+    background: #6C5CE7;
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .field-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #F0EBFF;
+    background: #FAF8FF;
+  }
+  .field-table td:first-child {
+    font-weight: 700;
+    color: #6C5CE7;
+    white-space: nowrap;
+  }
+
+  /* 流程箭头 */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    font-size: 13px;
+  }
+  .flow-item {
+    background: #F0EBFF;
+    color: #6C5CE7;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-weight: 600;
+  }
+  .flow-arrow { color: #C9BFFF; font-size: 16px; }
+
+  .toc {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(108,92,231,0.08);
+  }
+  .toc h3 { font-size: 15px; color: #6C5CE7; margin-bottom: 8px; }
+  .toc a {
+    display: block;
+    padding: 6px 0;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid #F5F0FF;
+  }
+  .toc a:last-child { border-bottom: none; }
+  .toc a:hover { color: #6C5CE7; }
+  .toc a .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #F0EBFF;
+    color: #6C5CE7;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: #6C5CE7;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 10px; }
+    .chapter { padding: 18px 14px; }
+    .step { padding: 14px 12px; }
+    .step-body { padding-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 返回 -->
+  <a href="./index.html" class="back-link">← 返回工作台</a>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>🚀 宇宙边角办事处 · 极简部署教程</h1>
+    <p>跟着做就行，每一步都写清了点哪个按钮 · 大约 20 分钟全部搞定</p>
+  </div>
+
+  <!-- 目录 -->
+  <div class="toc">
+    <h3>📑 本教程包含 3 个部分</h3>
+    <a href="#part1"><span class="num">1</span>把工作台部署到 Vercel（获得永久公网网址）</a>
+    <a href="#part2"><span class="num">2</span>配置 jsonbin.io 双向数据同步（电脑↔手机自动同步）</a>
+    <a href="#part3"><span class="num">3</span>小米手机添加桌面图标（像 App 一样全屏使用）</a>
+  </div>
+
+  <!-- ============================ 第一部分：Vercel ============================ -->
+  <div class="chapter" id="part1">
+    <div class="chapter-badge badge-1">📍 第一部分</div>
+    <h2>把工作台部署到 Vercel</h2>
+    <p class="desc">目标：得到一个 <b>https://xxx.vercel.app</b> 永久网址，电脑和手机都能打开，不会休眠，免费 forever。</p>
+
+    <div class="flow">
+      <span class="flow-item">注册 GitHub</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item">上传源码</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item">Vercel 导入</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item">获得网址</span>
+    </div>
+
+    <!-- ===== 步骤1: 注册GitHub ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">1</span>
+        <span class="step-title">注册 GitHub 账号</span>
+      </div>
+      <div class="step-body">
+        <p>① 在电脑浏览器打开 <span class="url-key">https://github.com</span></p>
+        <p>② 点击右上角 <span class="btn-key">Sign up</span> 按钮</p>
+        <p>③ 输入你的邮箱 → 设置密码 → 设置用户名 → 完成验证码 → 点击 <span class="btn-key">Create account</span></p>
+        <p>④ 去邮箱收验证码，输入后激活账号</p>
+        <p>⑤ 登录成功后，页面显示你的 GitHub 主页，注册完成</p>
+        <div class="tip"><b>已经有 GitHub 账号？</b>直接跳到第 2 步。</div>
+      </div>
+    </div>
+
+    <!-- ===== 步骤2: 创建仓库 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">2</span>
+        <span class="step-title">在 GitHub 创建一个新仓库</span>
+      </div>
+      <div class="step-body">
+        <p>① 登录 GitHub 后，点击右上角头像旁边的 <span class="btn-key">＋</span> 号 → 选择 <span class="btn-key">New repository</span></p>
+        <p>② 在 <b>Repository name</b> 输入框里填：<span class="url-key">cosmos-workbench</span></p>
+        <p>③ 下方找到 <b>Add a README file</b> 选项，<b>打勾</b>（这样仓库不会是空的）</p>
+        <p>④ 滑到最下面，点 <span class="btn-key">Create repository</span> 绿色按钮</p>
+        <p>⑤ 页面跳转到你的新仓库，显示一个 README.md 文件，创建成功</p>
+      </div>
+    </div>
+
+    <!-- ===== 步骤3: 上传文件 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">3</span>
+        <span class="step-title">把 workbench 文件夹里所有文件上传到仓库</span>
+      </div>
+      <div class="step-body">
+        <p>① 在仓库页面点击 <span class="btn-key">Add file</span> 按钮 → 选择 <span class="btn-key">Upload files</span></p>
+        <p>② 打开电脑上的 <span class="url-key">workbench</span> 文件夹（就是 index.html 所在的那个文件夹）</p>
+        <p>③ <b>全选</b>文件夹里的<b>所有文件和子文件夹</b>（Ctrl+A 全选），然后<b>拖拽</b>到 GitHub 网页上的上传区域</p>
+        <p>④ 等待文件上传完成（左下角进度条走完）</p>
+        <p>⑤ 上传完成后，页面下方 <b>Commit changes</b> 区域，直接点 <span class="btn-key">Commit changes</span> 绿色按钮</p>
+        <div class="warn"><b>注意：</b>要上传的是 workbench 文件夹<b>里面</b>的内容，不是 workbench 文件夹本身。仓库根目录应该直接看到 index.html、css、js、icons 等。</div>
+        <div class="tip"><b>文件较多？</b>GitHub 一次最多拖 100 个文件。workbench 大约 27 个文件，可以一次拖完。如果有子文件夹（css、js、icons），GitHub 会自动保留目录结构。</div>
+      </div>
+    </div>
+
+    <!-- ===== 步骤4: 注册Vercel ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">4</span>
+        <span class="step-title">注册 Vercel 账号</span>
+      </div>
+      <div class="step-body">
+        <p>① 在电脑浏览器打开 <span class="url-key">https://vercel.com</span></p>
+        <p>② 点击右上角 <span class="btn-key">Sign Up</span></p>
+        <p>③ 选择 <span class="btn-key">Continue with GitHub</span>（用 GitHub 账号登录，不用再注册一次）</p>
+        <p>④ 弹出授权页面，点 <span class="btn-key">Authorize Vercel</span> 同意授权</p>
+        <p>⑤ 可能让你填一个昵称，随便填 → 点 <span class="btn-key">Continue</span></p>
+        <p>⑥ 进入 Vercel 控制台首页（Dashboard），注册完成</p>
+      </div>
+    </div>
+
+    <!-- ===== 步骤5: 导入部署 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">5</span>
+        <span class="step-title">导入 GitHub 仓库，一键部署</span>
+      </div>
+      <div class="step-body">
+        <p>① 在 Vercel 控制台首页，点击 <span class="btn-key">Add New...</span> 按钮 → 选择 <span class="btn-key">Project</span></p>
+        <p>② 页面显示你的 GitHub 仓库列表，找到 <b>cosmos-workbench</b> → 点击右侧 <span class="btn-key">Import</span> 按钮</p>
+        <p>③ 进入配置页面，<b>什么都不用改</b>，直接点 <span class="btn-key">Deploy</span> 蓝色大按钮</p>
+        <p>④ 等待约 30 秒，页面会显示部署进度，出现 <b>🎉 Congratulations!</b> 就说明成功了</p>
+        <p>⑤ 点击 <span class="btn-key">Visit</span> 按钮，打开你的工作台！</p>
+      </div>
+    </div>
+
+    <!-- ===== 步骤6: 获得永久网址 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">6</span>
+        <span class="step-title">获得你的永久公网网址</span>
+      </div>
+      <div class="step-body">
+        <p>部署成功后，Vercel 会给你一个网址，格式类似：</p>
+        <div class="copy-box">
+          <span class="copy-label">你的网址</span>
+          https://cosmos-workbench-xxx.vercel.app
+        </div>
+        <p>这个网址是<b>永久有效的</b>，不会休眠，不会过期，全球都能访问。</p>
+        <div class="tip"><b>怎么再找到这个网址？</b>登录 vercel.com → 左侧 <span class="btn-key">Dashboard</span> → 点你的项目名 → 顶部就是网址。</div>
+        <div class="success"><b>✅ 到这里，第一部分完成！</b>把这个网址发给手机，在小米 15 浏览器打开就能用。继续做第二部分配置数据同步。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ 第二部分：jsonbin.io ============================ -->
+  <div class="chapter" id="part2">
+    <div class="chapter-badge badge-2">☁️ 第二部分</div>
+    <h2>配置 jsonbin.io 双向数据同步</h2>
+    <p class="desc">目标：电脑上输入的数据自动同步到手机，手机上输入的数据自动同步到电脑。配置一次，以后全自动。</p>
+
+    <div class="flow">
+      <span class="flow-item">注册 jsonbin.io</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item">创建数据仓库</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item">复制两串密钥</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item">粘贴到工作台</span>
+    </div>
+
+    <!-- ===== 步骤1: 注册 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">1</span>
+        <span class="step-title">注册 jsonbin.io 免费账号</span>
+      </div>
+      <div class="step-body">
+        <p>① 在电脑浏览器打开 <span class="url-key">https://jsonbin.io</span></p>
+        <p>② 点击页面右上角 <span class="btn-key">Sign Up</span> 按钮</p>
+        <p>③ 填写邮箱和密码 → 点 <span class="btn-key">Sign Up</span></p>
+        <p>④ 去邮箱点确认链接激活账号</p>
+        <p>⑤ 登录后页面跳转到控制台首页，看到左侧菜单栏，注册成功</p>
+        <div class="tip"><b>免费额度：</b>每月 10,000 次读写请求。工作台每 5 分钟同步一次，一天约 288 次，一个月约 8,640 次，<b>完全够用</b>。</div>
+      </div>
+    </div>
+
+    <!-- ===== 步骤2: 创建Bin ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">2</span>
+        <span class="step-title">创建一个数据存储仓库（Bin）</span>
+      </div>
+      <div class="step-body">
+        <p>① 登录后，在左侧菜单点击 <span class="btn-key">New Bin</span></p>
+        <p>② 页面出现一个代码编辑框，里面有一些默认文字，<b>全部删除</b></p>
+        <p>③ 在编辑框里输入一个大括号：</p>
+        <div class="copy-box">
+          <span class="copy-label">输入这串</span>
+          {}
+        </div>
+        <p>④ 给这个 Bin 起个名字：在 <b>Bin Name</b> 输入框里填 <span class="url-key">cosmos-sync</span>（名字随便取，方便记忆）</p>
+        <p>⑤ 点击 <b>Publish</b> 或 <span class="btn-key">Create</span> 按钮，创建成功</p>
+        <p>⑥ 创建后页面跳转，你会看到一个网址，类似：</p>
+        <div class="copy-box">
+          <span class="copy-label">这是你的 Bin URL</span>
+          https://api.jsonbin.io/v3/b/684a3b2face6f34c4fcaf1b3
+        </div>
+        <p>⑦ <b>把这一整段网址复制保存好</b>（这是第一个要粘贴到工作台的东西）</p>
+        <div class="warn"><b>重要：</b>这个网址后面那串字母数字混合的就是你的 Bin ID。整个网址要<b>完整复制</b>，包括 <span class="url-key">https://api.jsonbin.io/v3/b/</span> 前缀。</div>
+      </div>
+    </div>
+
+    <!-- ===== 步骤3: 获取API Key ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">3</span>
+        <span class="step-title">获取访问密钥（API Key）</span>
+      </div>
+      <div class="step-body">
+        <p>① 点击页面左下角你的<b>头像</b>或用户名 → 选择 <span class="btn-key">API Keys</span></p>
+        <p>（或者直接打开 <span class="url-key">https://jsonbin.io/api-keys</span>）</p>
+        <p>② 页面显示你的 <b>X-Master-Key</b>，是一串以 <span class="url-key">$2a$10$</span> 开头的很长很长的字符串，类似：</p>
+        <div class="copy-box">
+          <span class="copy-label">这是你的密钥</span>
+          $2a$10$O8sQ3vXyZabcDEFghIJKLmnopQRSTuvwxyz1234567890abcdefghijklmnop
+        </div>
+        <p>③ 点击旁边的 <span class="btn-key">Copy</span> 按钮复制（或者手动全选复制）</p>
+        <p>④ <b>把这段密钥保存好</b>（这是第二个要粘贴到工作台的东西）</p>
+        <div class="warn"><b>注意：</b>密钥很长，一定要<b>完整复制</b>，不能漏字符。建议用旁边的 Copy 按钮而不是手动选。</div>
+      </div>
+    </div>
+
+    <!-- ===== 步骤4: 粘贴到工作台（电脑端） ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">4</span>
+        <span class="step-title">在电脑端工作台填写同步配置</span>
+      </div>
+      <div class="step-body">
+        <p>① 在电脑浏览器打开你的 Vercel 工作台网址</p>
+        <p>② 点击侧边栏底部的 <span class="btn-key">⚙️ 数据管理</span> 按钮</p>
+        <p>③ 弹出「数据管理中心」面板，向下滚动找到 <b>☁️ 跨设备云端同步</b> 区域</p>
+        <p>④ 你会看到 3 个输入框，按下面的对照填写：</p>
+        <table class="field-table">
+          <tr><th>输入框名称</th><th>填什么</th></tr>
+          <tr>
+            <td>同步空间标识</td>
+            <td>自己取一个好记的名字，比如 <span class="url-key">my-office-2026</span><br><small>⚠️ 手机端要填<b>一模一样</b>的名字才能配对同步</small></td>
+          </tr>
+          <tr>
+            <td>云端存储端点 URL</td>
+            <td>粘贴第 2 步复制的 <b>Bin URL</b><br><small>⚠️ 就是 <span class="url-key">https://api.jsonbin.io/v3/b/xxxxx</span> 那个</small></td>
+          </tr>
+          <tr>
+            <td>访问密钥 Token</td>
+            <td>粘贴第 3 步复制的 <b>X-Master-Key</b><br><small>⚠️ 就是 <span class="url-key">$2a$10$xxx...</span> 那个</small></td>
+          </tr>
+        </table>
+        <p>⑤ 确认下方 <b>自动实时同步</b> 开关是<b>打开</b>状态（蓝色）</p>
+        <p>⑥ 点击 <span class="btn-key">💾 保存配置</span> 按钮，弹出提示「同步配置已保存 ✓」</p>
+        <p>⑦ 点击 <span class="btn-key">🔄 立即同步</span> 按钮，弹出提示「数据同步完成 ✓」</p>
+        <div class="success"><b>✅ 电脑端配置完成！</b>现在电脑上的数据已经上传到云端了。继续在手机端做相同配置。</div>
+      </div>
+    </div>
+
+    <!-- ===== 步骤5: 手机端配置 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">5</span>
+        <span class="step-title">在小米手机端工作台填写相同的同步配置</span>
+      </div>
+      <div class="step-body">
+        <p>① 在小米 15 手机浏览器打开<b>同一个</b> Vercel 工作台网址</p>
+        <p>② 点击左上角 <span class="btn-key">☰</span> 汉堡菜单按钮 → 展开侧边栏</p>
+        <p>③ 点击侧边栏底部的 <span class="btn-key">⚙️ 数据管理</span></p>
+        <p>④ 在 <b>☁️ 跨设备云端同步</b> 区域，填入<b>与电脑端完全相同的 3 个值</b>：</p>
+        <table class="field-table">
+          <tr><th>输入框</th><th>手机端填</th></tr>
+          <tr><td>同步空间标识</td><td><b>必须和电脑一样</b>，比如 my-office-2026</td></tr>
+          <tr><td>云端存储端点 URL</td><td><b>同一个</b> Bin URL</td></tr>
+          <tr><td>访问密钥 Token</td><td><b>同一个</b> X-Master-Key</td></tr>
+        </table>
+        <p>⑤ 点击 <span class="btn-key">💾 保存配置</span> → 再点 <span class="btn-key">🔄 立即同步</span></p>
+        <p>⑥ 弹出提示「同步成功：新增 XX 条」就说明电脑端的数据已经同步到手机了！</p>
+        <div class="success"><b>✅ 双向同步配置完成！</b>现在你在电脑上打卡、写日记、加单词，手机端自动同步最新内容；反过来也一样。</div>
+      </div>
+    </div>
+
+    <!-- ===== 同步说明 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">💡</span>
+        <span class="step-title">同步怎么自动运行的？需要我做什么吗？</span>
+      </div>
+      <div class="step-body">
+        <p><b>不用做任何事，全自动！</b>配置好之后：</p>
+        <p>✅ 你在任意一端修改数据 → <b>5 秒后自动上传</b>到云端</p>
+        <p>✅ 打开工作台时 → <b>自动拉取</b>云端最新数据并合并</p>
+        <p>✅ 每隔 5 分钟 → <b>自动同步一次</b></p>
+        <p>✅ 手机断网后恢复网络 → <b>自动同步</b></p>
+        <p>✅ 想立刻同步？点侧边栏 <span class="btn-key">☁️ 同步</span> 按钮一键强制同步</p>
+        <div class="tip"><b>数据安全：</b>所有数据先存在你设备的 IndexedDB 里（浏览器关了也不会丢），再同步到云端。即使 jsonbin.io 挂了，本地数据还在。还可以随时在「数据管理」里导出 JSON 备份。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ 第三部分：PWA安装 ============================ -->
+  <div class="chapter" id="part3">
+    <div class="chapter-badge badge-3">📱 第三部分</div>
+    <h2>小米手机添加桌面图标（PWA 安装）</h2>
+    <p class="desc">目标：在小米 15 桌面生成「宇宙边角办事处」独立图标，点击后全屏启动，像原生 App 一样，没有浏览器地址栏。</p>
+
+    <div class="flow">
+      <span class="flow-item">打开网址</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item">点菜单</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item">添加到桌面</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item">全屏使用</span>
+    </div>
+
+    <!-- ===== 步骤1 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">1</span>
+        <span class="step-title">在小米手机浏览器打开工作台网址</span>
+      </div>
+      <div class="step-body">
+        <p>① 打开小米 15 自带的<b>浏览器</b>（或 Chrome / Edge 都行）</p>
+        <p>② 在地址栏输入你的 Vercel 网址：</p>
+        <div class="copy-box">
+          <span class="copy-label">你的网址</span>
+          https://cosmos-workbench-xxx.vercel.app
+        </div>
+        <p>③ 按回车，等待页面加载完成，看到「宇宙边角办事处」工作台界面</p>
+        <div class="warn"><b>重要：</b>网址必须是 <b>https://</b> 开头（Vercel 自动给你 HTTPS），否则无法安装 PWA。</div>
+      </div>
+    </div>
+
+    <!-- ===== 步骤2 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">2</span>
+        <span class="step-title">打开浏览器菜单</span>
+      </div>
+      <div class="step-body">
+        <p>根据你用的浏览器，找到菜单按钮：</p>
+        <p><b>小米浏览器：</b>点击底部正下方的 <span class="btn-key">☰</span> 三条线菜单按钮</p>
+        <p><b>Chrome：</b>点击右上角 <span class="btn-key">⋮</span> 三个点按钮</p>
+        <p><b>Edge：</b>点击右下角 <span class="btn-key">⋯</span> 三个点按钮</p>
+        <p>菜单从底部弹出，显示一排图标选项</p>
+      </div>
+    </div>
+
+    <!-- ===== 步骤3 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">3</span>
+        <span class="step-title">选择「添加到桌面」或「安装应用」</span>
+      </div>
+      <div class="step-body">
+        <p>在弹出的菜单中找到并点击：</p>
+        <p><b>小米浏览器：</b>找到 <span class="btn-key">添加到桌面</span> → 点击</p>
+        <p><b>Chrome：</b>找到 <span class="btn-key">安装应用</span> 或 <span class="btn-key">添加到主屏幕</span> → 点击</p>
+        <p><b>Edge：</b>找到 <span class="btn-key">添加到手机</span> → 选 <span class="btn-key">安装</span></p>
+        <div class="tip"><b>Chrome 额外提示：</b>如果你在地址栏右侧看到一个 <b>📲 安装图标</b>，也可以直接点那个图标，跳过菜单。</div>
+      </div>
+    </div>
+
+    <!-- ===== 步骤4 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">4</span>
+        <span class="step-title">确认安装，桌面生成图标</span>
+      </div>
+      <div class="step-body">
+        <p>① 弹出一个确认窗口，显示「宇宙边角办事处」的图标和名称</p>
+        <p>② 点击 <span class="btn-key">添加</span> 或 <span class="btn-key">安装</span> 按钮确认</p>
+        <p>③ 提示「已添加到主屏幕」</p>
+        <p>④ 回到手机桌面，你会看到一个独立的 <b>「边角办事处」</b> 应用图标</p>
+      </div>
+    </div>
+
+    <!-- ===== 步骤5 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">5</span>
+        <span class="step-title">点击桌面图标，全屏启动</span>
+      </div>
+      <div class="step-body">
+        <p>① 在手机桌面找到「边角办事处」图标，点击它</p>
+        <p>② 工作台<b>全屏启动</b>，没有浏览器地址栏，没有底部导航栏，就像一个真正的 App</p>
+        <p>③ 首次打开可能需要联网加载一下（Service Worker 缓存页面）</p>
+        <p>④ 之后即使断网也能打开使用（离线模式），联网后自动同步数据</p>
+        <div class="success"><b>✅ 全部搞定！</b>你现在可以像用原生 App 一样使用「宇宙边角办事处」了。</div>
+      </div>
+    </div>
+
+    <!-- ===== 安装后配置 ===== -->
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">6</span>
+        <span class="step-title">安装后配置数据同步（如果还没配）</span>
+      </div>
+      <div class="step-body">
+        <p>如果第二部分的同步配置你还没在手机端做，现在补上：</p>
+        <p>① 打开桌面图标启动工作台</p>
+        <p>② 点左上角 <span class="btn-key">☰</span> → 点 <span class="btn-key">⚙️ 数据管理</span></p>
+        <p>③ 填入与电脑端<b>相同</b>的同步空间标识、Bin URL、X-Master-Key（参照第二部分第 5 步）</p>
+        <p>④ 点 <span class="btn-key">💾 保存配置</span> → 点 <span class="btn-key">🔄 立即同步</span></p>
+        <p>⑤ 电脑端的数据就同步过来了！</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ 总结 ============================ -->
+  <div class="chapter">
+    <div class="chapter-badge" style="background:linear-gradient(135deg,#FF9800,#FFB74D)">🎯 总结</div>
+    <h2>全部完成后的效果</h2>
+    <p class="desc">三部分都做完后，你拥有：</p>
+
+    <div class="success">
+      <p><b>🌐 永久公网网址：</b>https://cosmos-workbench-xxx.vercel.app<br>电脑、手机、任何设备打开都能用，不会休眠</p>
+    </div>
+    <div class="success">
+      <p><b>☁️ 自动数据同步：</b>电脑上打卡写日记 → 手机自动收到<br>手机上加单词 → 电脑自动同步，完全不用手动操作</p>
+    </div>
+    <div class="success">
+      <p><b>📱 手机桌面 App：</b>小米 15 桌面有独立图标，全屏启动<br>离线也能用，联网自动同步，体验和原生 App 一样</p>
+    </div>
+
+    <div class="tip" style="margin-top:16px">
+      <b>💡 遇到问题？</b><br>
+      • 网页打不开 → 检查 Vercel 部署是否成功，网址是否正确<br>
+      • 同步不生效 → 检查两端填的 3 个值是否完全一致，点「一键强制同步」<br>
+      • PWA 装不了 → 确保网址是 https:// 开头，换 Chrome 浏览器试试<br>
+      • 手机端显示旧版 → 下拉刷新页面，或清除浏览器缓存后重新打开
+    </div>
+  </div>
+
+  <p style="text-align:center;color:#9898B0;font-size:13px;margin:20px 0">
+    宇宙边角办事处 · 极简部署教程 · 跟着做就行
+  </p>
+</div>
+</body>
+</html>

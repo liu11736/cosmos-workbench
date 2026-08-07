@@ -1,0 +1,740 @@
+/* ===== 每日计划模块样式 ===== */
+
+/* 每日清单布局 */
+.daily-list-layout {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+}
+
+.daily-calendar-section {
+  width: 380px;
+  flex-shrink: 0;
+}
+
+.daily-tasks-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* 日历卡片 */
+.calendar-card {
+  padding: 16px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.cal-nav-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.cal-nav-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-main);
+}
+
+.cal-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.calendar-year-selector {
+  margin-bottom: 10px;
+}
+
+.cal-year-select {
+  padding: 4px 8px;
+  font-size: 13px;
+  width: auto;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 6px;
+}
+
+.calendar-weekdays span {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-light);
+  padding: 4px 0;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.cal-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.cal-cell:not(.empty):hover {
+  background: var(--bg-card-hover);
+}
+
+.cal-cell.empty {
+  cursor: default;
+}
+
+.cal-cell.today {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.cal-cell.today::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.cal-cell.selected {
+  background: var(--color-primary);
+  color: white;
+}
+
+.cal-cell.selected.today::after {
+  background: white;
+}
+
+.cal-day {
+  font-size: 13px;
+}
+
+.cal-dot {
+  font-size: 9px;
+  color: var(--text-light);
+  margin-top: 1px;
+}
+
+.cal-cell.selected .cal-dot {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.cal-dot.all-done {
+  color: var(--color-primary);
+}
+
+.cal-cell.selected .cal-dot.all-done {
+  color: white;
+}
+
+/* 任务卡片 */
+.tasks-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.tasks-header {
+  margin-bottom: 12px;
+}
+
+.tasks-date-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.tasks-summary {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.task-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.task-input {
+  flex: 1;
+}
+
+.task-list {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.task-list::-webkit-scrollbar { width: 4px; }
+.task-list::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+  margin-bottom: 4px;
+}
+
+.task-item:hover {
+  background: var(--bg-card-hover);
+}
+
+.task-item.done .task-text {
+  text-decoration: line-through;
+  color: var(--text-light);
+}
+
+.task-checkbox {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+
+.task-checkbox.checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.task-checkbox:hover {
+  border-color: var(--color-primary);
+}
+
+.task-text {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.task-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.task-item:hover .task-actions {
+  opacity: 1;
+}
+
+.task-action-btn {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-light);
+  transition: all var(--transition);
+}
+
+.task-action-btn:hover {
+  background: var(--bg-sidebar-active);
+  color: var(--text-main);
+}
+
+/* 统计卡片 */
+.stats-card {
+  flex-shrink: 0;
+}
+
+.freq-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.freq-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.freq-label {
+  width: 140px;
+  font-size: 13px;
+  color: var(--text-main);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.freq-bar-container {
+  flex: 1;
+  height: 20px;
+  background: var(--bg-input);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.freq-bar {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+  opacity: 0.85;
+}
+
+.freq-count {
+  font-size: 12px;
+  color: var(--text-secondary);
+  width: 40px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ===== 打卡周样式 ===== */
+.checkin-week-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkin-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkin-week-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.week-info {
+  display: flex;
+  gap: 8px;
+}
+
+.week-info select {
+  width: auto;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+/* 打卡网格 */
+.checkin-grid-card {
+  overflow-x: auto;
+}
+
+.week-date-range {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.checkin-grid-wrapper {
+  overflow-x: auto;
+}
+
+.checkin-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+
+.checkin-grid th {
+  padding: 8px 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-align: center;
+}
+
+.checkin-grid th .col-weekday {
+  display: block;
+  font-size: 13px;
+}
+
+.checkin-grid th .col-date {
+  display: block;
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.checkin-grid th.today-col {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.checkin-grid th.checkin-item-col {
+  text-align: left;
+  width: 160px;
+  min-width: 160px;
+}
+
+.checkin-grid th.checkin-rate-col {
+  width: 100px;
+  min-width: 100px;
+}
+
+.checkin-grid td {
+  text-align: center;
+}
+
+.checkin-item-col {
+  text-align: left !important;
+  padding: 8px 10px !important;
+  position: relative;
+}
+
+.checkin-item-col .item-color-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.checkin-item-col .item-name {
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.checkin-item-col .item-actions {
+  display: inline-flex;
+  gap: 2px;
+  margin-left: 4px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.checkin-grid tbody tr:hover .item-actions {
+  opacity: 1;
+}
+
+.checkin-cell {
+  padding: 6px !important;
+  cursor: pointer;
+}
+
+.checkin-cell.today-cell {
+  background: rgba(108, 92, 231, 0.08);
+  border-radius: var(--radius-sm);
+}
+
+.checkin-circle {
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+
+.checkin-circle:hover {
+  border-color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.checkin-circle.checked {
+  border: none;
+}
+
+.checkin-rate-col {
+  padding: 8px !important;
+}
+
+.rate-bar-container {
+  width: 60px;
+  height: 6px;
+  background: var(--bg-input);
+  border-radius: 3px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.rate-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.rate-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+/* 打卡统计 */
+.checkin-stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.big-rate-display {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.big-rate-number {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.big-rate-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.big-rate-detail {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.item-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.item-color-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.item-stat-name {
+  font-size: 13px;
+  color: var(--text-main);
+  width: 70px;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mini-bar-container {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-input);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.mini-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.item-stat-rate {
+  font-size: 12px;
+  color: var(--text-secondary);
+  width: 35px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.year-stat {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.year-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.year-stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.year-stat-label {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+/* 颜色选择器 */
+.color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--transition);
+}
+
+.color-option.selected {
+  border-color: var(--text-main);
+  transform: scale(1.15);
+}
+
+/* 响应式 */
+@media (max-width: 1100px) {
+  .daily-list-layout {
+    flex-direction: column;
+  }
+  .daily-calendar-section {
+    width: 100%;
+  }
+  .checkin-stats-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 日历适配竖屏 */
+  .calendar-card {
+    padding: 12px;
+  }
+  .cal-cell {
+    font-size: 12px;
+  }
+  .cal-day {
+    font-size: 12px;
+  }
+  .cal-dot {
+    font-size: 8px;
+  }
+  .calendar-weekdays span {
+    font-size: 11px;
+    padding: 2px 0;
+  }
+
+  /* 任务输入行适配 */
+  .task-input-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .task-input-row .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+  }
+  .task-input {
+    font-size: 15px;
+    padding: 10px 12px;
+  }
+
+  /* 任务列表适配 */
+  .task-item {
+    padding: 12px 10px;
+  }
+  .task-checkbox {
+    width: 26px;
+    height: 26px;
+  }
+  .task-text {
+    font-size: 14px;
+  }
+  .task-action-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+
+  /* 频率统计适配 */
+  .freq-label {
+    width: 100px;
+    font-size: 12px;
+  }
+  .freq-bar-container {
+    height: 16px;
+  }
+
+  /* 打卡周工具栏 */
+  .checkin-toolbar {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .checkin-week-selector {
+    flex-wrap: wrap;
+  }
+
+  /* 打卡网格横向滚动 */
+  .checkin-grid-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .checkin-grid {
+    min-width: 500px;
+  }
+
+  /* 打卡圆圈放大触控 */
+  .checkin-circle {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* 统计行单列 */
+  .checkin-stats-row {
+    grid-template-columns: 1fr;
+  }
+  .big-rate-number {
+    font-size: 28px;
+  }
+
+  /* 颜色选择器放大 */
+  .color-option {
+    width: 36px;
+    height: 36px;
+  }
+}

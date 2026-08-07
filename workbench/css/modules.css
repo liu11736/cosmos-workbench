@@ -1,0 +1,1745 @@
+/* ===== 新模块通用样式 ===== */
+
+/* 通用布局 */
+.mod-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mod-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mod-date-picker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.mod-select {
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  font-size: 13px;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.mod-badge {
+  padding: 4px 12px;
+  background: var(--color-primary-light);
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.mod-hint {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* 通用卡片网格 */
+.mod-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+/* 空状态 */
+.mod-empty {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.mod-empty-icon {
+  font-size: 48px;
+  opacity: 0.4;
+  margin-bottom: 12px;
+}
+
+.mod-empty-text {
+  font-size: 15px;
+  color: var(--text-light);
+}
+
+/* 搜索框 */
+.news-search-box, .recipe-search-box {
+  flex: 1;
+  min-width: 180px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+
+.news-search-box span, .recipe-search-box span {
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.news-search-box input, .recipe-search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 0;
+  font-size: 13px;
+  color: var(--text-main);
+  outline: none;
+}
+
+/* 标签过滤 */
+.mod-tag-filter {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.mod-tag-filter-btn {
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  transition: all var(--transition);
+}
+
+.mod-tag-filter-btn.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* 表单组件 */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  font-size: 14px;
+  color: var(--text-main);
+  font-family: inherit;
+  transition: all var(--transition);
+  box-sizing: border-box;
+}
+
+.form-input:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ===== 热点卡片（通用） ===== */
+.hotspot-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all var(--transition);
+}
+
+.hotspot-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.hotspot-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hotspot-category {
+  padding: 2px 10px;
+  border-radius: 10px;
+  background: var(--color-primary-light);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.hotspot-heat {
+  font-size: 12px;
+  color: #FF6B35;
+  font-weight: 600;
+}
+
+.hotspot-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+.hotspot-section {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hotspot-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.hotspot-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.hotspot-sentiment-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(255, 152, 0, 0.2);
+  color: #FF9800;
+  font-size: 12px;
+  width: fit-content;
+}
+
+.hotspot-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.viral-idea {
+  background: rgba(108, 92, 231, 0.08);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-primary-light);
+}
+
+/* ===== 素材/笔记卡片（通用） ===== */
+.material-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all var(--transition);
+}
+
+.material-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.material-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.material-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.material-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.material-actions button {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  background: var(--bg-input);
+  transition: all var(--transition);
+}
+
+.material-actions button:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.material-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.material-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.material-tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.material-date {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.benchmark-link {
+  display: block;
+  font-size: 12px;
+  color: var(--color-accent);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.benchmark-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== 内容复盘卡片 ===== */
+.review-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-card-title {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.review-date {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.review-link {
+  font-size: 12px;
+  color: var(--text-light);
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.review-del-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  font-size: 13px;
+}
+
+.review-del-btn:hover {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.review-data-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.review-data-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 14px;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  min-width: 60px;
+}
+
+.review-data-label {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.review-data-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.review-script {
+  padding: 10px 12px;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+}
+
+.review-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.review-script p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.review-analysis {
+  border-top: 1px solid var(--border-light);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.analysis-summary {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 10px;
+  background: rgba(108, 92, 231, 0.1);
+  border-radius: var(--radius-sm);
+}
+
+.analysis-section {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.analysis-tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.analysis-tag.good {
+  background: rgba(108, 92, 231, 0.2);
+  color: #4CAF50;
+}
+
+.analysis-tag.bad {
+  background: rgba(255, 23, 68, 0.2);
+  color: #FF1744;
+}
+
+.analysis-tag.plan {
+  background: rgba(255, 152, 0, 0.2);
+  color: #FF9800;
+}
+
+.analysis-section p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ===== 菜谱模块 ===== */
+.recipe-category-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 10px 0;
+}
+
+.recipe-cat-btn {
+  padding: 6px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  transition: all var(--transition);
+}
+
+.recipe-cat-btn.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+.recipe-cat-add-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  border: 1px dashed var(--border-color);
+  color: var(--text-light);
+}
+
+.recipe-cat-add-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+
+.recipe-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recipe-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.recipe-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.recipe-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.recipe-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.recipe-cat-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--color-primary-light);
+  color: white;
+  font-size: 11px;
+}
+
+.recipe-duration, .recipe-taste {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.recipe-steps {
+  white-space: pre-line;
+  font-size: 13px !important;
+}
+
+.recipe-note {
+  background: rgba(255, 152, 0, 0.1);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid #FF9800;
+}
+
+/* 周食谱表格 */
+.plan-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 16px;
+}
+
+.plan-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.plan-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.plan-date {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+
+.plan-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.plan-table th {
+  padding: 8px;
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-align: left;
+  border-radius: var(--radius-sm);
+}
+
+.plan-table td {
+  padding: 8px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-main);
+}
+
+.plan-day-cell {
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.plan-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.plan-form-day {
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+}
+
+.plan-form-day-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 8px;
+}
+
+.plan-form-meal {
+  margin-bottom: 6px;
+}
+
+.plan-form-meal label {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.plan-form-meal input {
+  width: 100%;
+  padding: 4px 8px;
+  font-size: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+}
+
+/* 采购清单 */
+.shopping-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.shopping-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+  padding: 8px 0 4px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 4px;
+}
+
+.shopping-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+}
+
+.shopping-item.checked {
+  opacity: 0.5;
+}
+
+.shopping-item.checked .shopping-name {
+  text-decoration: line-through;
+}
+
+.shopping-check-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.shopping-check {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+}
+
+.shopping-name {
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.shopping-info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.shopping-amount {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.shopping-recipe {
+  font-size: 11px;
+  color: var(--color-accent);
+}
+
+.shopping-del-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  font-size: 12px;
+}
+
+.shopping-del-btn:hover {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.recipe-multi-select {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.multi-select-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ===== 新闻联播模块 ===== */
+.news-video-area {
+  margin-bottom: 16px;
+}
+
+.news-video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #000;
+}
+
+.news-video-wrapper iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+.news-video-placeholder {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+
+.news-video-icon {
+  font-size: 56px;
+  margin-bottom: 12px;
+}
+
+.news-video-text {
+  font-size: 16px;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.news-video-hint {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.news-video-chapters {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.news-chapter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.news-chapter-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+  cursor: pointer;
+}
+
+.news-chapter-item:hover {
+  background: var(--bg-card-hover);
+}
+
+.news-chapter-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.news-chapter-title {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.news-chapter-cat {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+/* 文稿 */
+.transcript-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.transcript-item-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.transcript-num {
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--color-primary-light);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.transcript-cat {
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.transcript-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.transcript-content {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* 深度解读卡片 */
+.analysis-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.analysis-card-header {
+  margin-bottom: 12px;
+}
+
+.analysis-card-title-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.analysis-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.analysis-cat-badge {
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.cat-politics { background: rgba(233, 30, 99, 0.2); color: #E91E63; }
+.cat-economy { background: rgba(108, 92, 231, 0.2); color: #4CAF50; }
+.cat-livelihood { background: rgba(255, 152, 0, 0.2); color: #FF9800; }
+.cat-international { background: rgba(63, 81, 181, 0.2); color: #3F51B5; }
+.cat-default { background: var(--bg-input); color: var(--text-secondary); }
+
+.analysis-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+.analysis-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.analysis-block {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+}
+
+.analysis-block.analysis-deep {
+  background: rgba(108, 92, 231, 0.08);
+  border-left: 3px solid var(--color-primary-light);
+}
+
+.analysis-block-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+
+.analysis-block-content {
+  font-size: 14px;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.analysis-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+/* 历史资料库 */
+.archive-date-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.archive-date-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.archive-date-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--color-primary-light);
+}
+
+.archive-date-card.active {
+  border-color: var(--color-primary);
+  background: rgba(108, 92, 231, 0.06);
+}
+
+.archive-date-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.archive-date-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.archive-count {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.archive-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.archive-title-line {
+  font-size: 12px;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.archive-more {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* ===== 财联社资讯模块 ===== */
+.fin-news-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.fin-news-card.compact {
+  padding: 12px 14px;
+}
+
+.fin-news-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.fin-news-time {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.fin-sentiment-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.sentiment-good { background: rgba(108, 92, 231, 0.2); color: #4CAF50; }
+.sentiment-bad { background: rgba(255, 23, 68, 0.2); color: #FF1744; }
+.sentiment-neutral { background: var(--bg-input); color: var(--text-secondary); }
+
+.fin-fav-source {
+  font-size: 11px;
+  color: var(--text-light);
+  padding: 1px 6px;
+  background: var(--bg-input);
+  border-radius: 8px;
+}
+
+.fin-news-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.fin-news-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.fin-news-analysis {
+  padding: 10px 12px;
+  background: rgba(108, 92, 231, 0.08);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-primary-light);
+}
+
+.fin-analysis-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+
+.fin-news-analysis p {
+  font-size: 13px;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.fin-news-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.fin-fav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* ===== 基金策略模块 ===== */
+.fund-context-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.fund-context-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.fund-context-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fund-context-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.fund-context-item {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.fund-context-empty {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* 基金推荐卡片 */
+.fund-rec-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.fund-rec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.fund-rec-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.fund-rec-code {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-right: 6px;
+}
+
+.fund-rec-del-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  font-size: 13px;
+}
+
+.fund-rec-del-btn:hover {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.fund-rec-section {
+  margin-bottom: 12px;
+}
+
+.fund-rec-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+
+.fund-rec-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.fund-rec-sub {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.fund-rec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.fund-rec-grid.compact {
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.fund-rec-metric {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+}
+
+.metric-label {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.metric-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-top: 2px;
+}
+
+.metric-value.pos { color: #c44545; }
+.metric-value.neg { color: #2d8659; }
+
+.fund-rec-risk {
+  padding: 10px 12px;
+  background: rgba(255, 23, 68, 0.08);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid rgba(255, 23, 68, 0.4);
+}
+
+/* 基金资料库卡片 */
+.fund-db-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fund-db-card.watching {
+  border-color: var(--color-primary-light);
+  background: rgba(108, 92, 231, 0.04);
+}
+
+.fund-db-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.fund-db-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.fund-watch-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-input);
+  font-size: 16px;
+  transition: all var(--transition);
+}
+
+.fund-watch-btn:hover {
+  transform: scale(1.2);
+}
+
+.fund-db-holdings {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.fund-holding-tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.fund-db-actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* 持仓卡片 */
+.holding-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.holding-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.holding-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.holding-del-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  font-size: 13px;
+}
+
+.holding-del-btn:hover {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.holding-actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* 交易记录表格 */
+.trade-table-wrap {
+  overflow-x: auto;
+}
+
+.trade-type {
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.trade-type.pos {
+  background: rgba(196, 69, 69, 0.15);
+  color: #c44545;
+}
+
+.trade-type.neg {
+  background: rgba(45, 134, 89, 0.15);
+  color: #2d8659;
+}
+
+/* 筛选器表格 */
+.screener-table-wrap {
+  overflow-x: auto;
+}
+
+.screener-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.screener-table th {
+  padding: 10px;
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.screener-table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.screener-name {
+  font-weight: 600;
+}
+
+.screener-table .pos { color: #c44545; }
+.screener-table .neg { color: #2d8659; }
+
+/* 基金详情弹窗 */
+.fund-detail-modal {
+  padding: 4px 0;
+}
+
+.fund-detail-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 16px;
+}
+
+.fund-detail-section {
+  margin-top: 12px;
+}
+
+.fund-holdings-detail {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 900px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .fund-context-grid {
+    grid-template-columns: 1fr;
+  }
+  .mod-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .fund-rec-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .plan-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 工具栏适配 */
+  .mod-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  /* 搜索框适配 */
+  .news-search-box, .recipe-search-box {
+    min-width: 0;
+    width: 100%;
+  }
+  .news-search-box input, .recipe-search-box input {
+    padding: 10px 0;
+    font-size: 15px;
+  }
+
+  /* 卡片网格单列 */
+  .mod-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* 热点卡片适配 */
+  .hotspot-card {
+    padding: 14px;
+  }
+  .hotspot-title {
+    font-size: 15px;
+  }
+  .hotspot-content {
+    font-size: 12px;
+  }
+
+  /* 素材卡片适配 */
+  .material-card {
+    padding: 12px 14px;
+  }
+  .material-title {
+    font-size: 14px;
+  }
+  .material-actions button {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+
+  /* 复盘卡片适配 */
+  .review-data-item {
+    padding: 6px 10px;
+    min-width: 50px;
+  }
+  .review-data-value {
+    font-size: 14px;
+  }
+  .review-link {
+    max-width: 200px;
+  }
+
+  /* 菜谱卡片适配 */
+  .recipe-card {
+    padding: 12px 14px;
+  }
+  .recipe-name {
+    font-size: 15px;
+  }
+
+  /* 菜谱分类横向滑动 */
+  .recipe-category-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 8px 0;
+  }
+  .recipe-category-bar::-webkit-scrollbar {
+    display: none;
+  }
+  .recipe-cat-btn {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  /* 周食谱表格横向滚动 */
+  .plan-table {
+    font-size: 12px;
+  }
+  .plan-table th, .plan-table td {
+    padding: 6px 4px;
+  }
+
+  /* 新闻模块适配 */
+  .news-video-wrapper {
+    padding-bottom: 56.25%;
+  }
+  .transcript-item {
+    padding: 14px;
+  }
+  .transcript-title {
+    font-size: 15px;
+  }
+  .transcript-content {
+    font-size: 13px;
+  }
+
+  /* 深度解读卡片适配 */
+  .analysis-card {
+    padding: 14px;
+  }
+  .analysis-title {
+    font-size: 15px;
+  }
+  .analysis-block-content {
+    font-size: 13px;
+  }
+
+  /* 资料库网格单列 */
+  .archive-date-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* 财联社资讯适配 */
+  .fin-news-card {
+    padding: 12px 14px;
+  }
+  .fin-news-title {
+    font-size: 15px;
+  }
+  .fin-news-content {
+    font-size: 13px;
+  }
+
+  /* 基金模块适配 */
+  .fund-context-grid {
+    grid-template-columns: 1fr;
+  }
+  .fund-rec-card {
+    padding: 14px;
+  }
+  .fund-rec-name {
+    font-size: 16px;
+  }
+  .fund-rec-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .fund-rec-grid.compact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* 筛选器表格横向滚动 */
+  .screener-table-wrap, .trade-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .screener-table {
+    min-width: 500px;
+  }
+  .screener-table th, .screener-table td {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+
+  /* 基金资料库卡片适配 */
+  .fund-db-card {
+    padding: 12px 14px;
+  }
+  .fund-db-name {
+    font-size: 14px;
+  }
+  .fund-watch-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  /* 表单适配 */
+  .form-input, .form-textarea {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  /* 标签过滤横向滑动 */
+  .mod-tag-filter {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mod-tag-filter::-webkit-scrollbar {
+    display: none;
+  }
+  .mod-tag-filter-btn {
+    flex-shrink: 0;
+    padding: 6px 12px;
+  }
+
+  /* 采购清单适配 */
+  .shopping-item {
+    padding: 12px;
+  }
+  .shopping-check {
+    width: 22px;
+    height: 22px;
+  }
+  .shopping-del-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+}
